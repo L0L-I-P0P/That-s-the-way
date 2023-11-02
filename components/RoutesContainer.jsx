@@ -9,8 +9,8 @@ const RouteCard = require('./RouteCard');
 function RoutesContainer({ routes, user }) {
   return (
     <div className="js-facts-container facts-container">
-      {routes.map((fact) => (
-        <RouteCard fact={fact} user={user} />
+      {routes.map((route) => (
+        <RouteCard route={route} user={user} />
       ))}
     </div>
   );

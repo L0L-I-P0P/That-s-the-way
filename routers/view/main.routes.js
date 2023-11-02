@@ -1,9 +1,12 @@
 const router = require('express').Router();
 const mainPage = require('../../components/Page/MainPage');
 
-router.get('/', (req, res) => {
+const { Route } = require('../../db/models');
+
+router.get('/', async (req, res) => {
   try {
-    res.send(res.renderComponent(mainPage));
+    const routes = await Route.findAll();
+    res.send(res.renderComponent(mainPage, { routes }));
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
