@@ -1,0 +1,35 @@
+.music-header {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  background-color: aquamarine;
+  padding: 10px;
+}
+.js-card {
+  margin-left: 160px;
+}
+.music-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.titleMain {
+  text-align: center;
+}
+#register-form,
+#login-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.musicText {
+  margin: 0px;
+  text-align: center;
+}
+.card-title,
+.card-text {
+  text-align: center;
+}
+.music-card {
+}
