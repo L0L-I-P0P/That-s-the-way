@@ -1,7 +1,6 @@
 const React = require('react');
 
 module.exports = function Raiting({ user }) {
-  let 
   return (
     <div className="ratingStar">
       <input type="radio" className="rating" value="1" />
