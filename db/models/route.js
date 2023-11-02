@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.TEXT,
       },
+      description: {
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
       route_from: {
         allowNull: false,
         type: DataTypes.TEXT,

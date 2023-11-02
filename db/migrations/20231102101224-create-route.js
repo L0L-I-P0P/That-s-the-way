@@ -13,6 +13,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
+      description: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
       route_from: {
         allowNull: false,
         type: Sequelize.TEXT,
@@ -37,9 +41,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
-          key: 'id'
+          key: 'id',
         },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
