@@ -3,7 +3,7 @@ const Layout = require('../Layout');
 
 module.exports = function MainPage({ title, user, route }) {
   return (
-    <Layout title={title}>
+    <Layout title={title} user={user}>
       <p>здесь будут карточки</p>
     </Layout>
   );

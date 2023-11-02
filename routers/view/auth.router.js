@@ -12,7 +12,18 @@ router.get('/register', (req, res) => {
 
 router.get('/login', (req, res) => {
   try {
-    res.send(res.renderComponent(LoginPage));
+    const { registered } = req.query;
+    res.send(res.renderComponent(LoginPage, { registered }));
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.get('/logout', (req, res) => {
+  try {
+    res.clearCookie('refresh').clearCookie('access');
+    res.locals.user = undefined;
+    res.redirect('/');
   } catch (error) {
     res.status(500).send(error);
   }
