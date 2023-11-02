@@ -11,14 +11,14 @@ const serverConfig = require('./config/serverConfig');
 
 const checkUser = require('./middleware/verifyJWT');
 
-const indexRouter = require('./routers/index.router');
+const indexRouter = require('./routers/index.routes');
 
 app.locals.title = 'Таков Путь';
-//подключение middleware
+// подключение middleware
 serverConfig(app);
 // проверка кто сидит на сайте через проверку токена(cookie)
 app.use(checkUser);
-//маршрутизация
+// маршрутизация
 app.use('/', indexRouter);
 
 app.listen(PORT, () => {
