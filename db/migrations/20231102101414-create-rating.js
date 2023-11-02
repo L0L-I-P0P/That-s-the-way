@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       rating: {
-        defaultValue: 5,
+        defaultValue: 3,
         type: Sequelize.FLOAT,
       },
       user_ID: {

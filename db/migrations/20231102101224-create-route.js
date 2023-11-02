@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       rating: {
-        defaultValue: 5,
+        defaultValue: 1,
         type: Sequelize.FLOAT,
       },
       user_ID: {

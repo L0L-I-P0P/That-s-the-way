@@ -2,6 +2,7 @@
 const React = require('react');
 
 const RouteCard = require('./RouteCard');
+const Raiting = require('./Raiting');
 
 // Реакт-компонент =  фунция с большой буквы, возвращает JSX-верстку, принимает
 // параметром объект props
