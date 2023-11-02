@@ -9,6 +9,11 @@ module.exports = function Layout({ children, title, user }) {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title}</title>
+        <script
+          defer
+          src="https://api-maps.yandex.ru/2.1/?apikey=151e3c4e-5b24-4ff4-b3dd-ee46a27a6498&lang=ru_RU"
+          type="text/javascript"
+        />
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
