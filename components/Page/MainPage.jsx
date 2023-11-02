@@ -4,7 +4,7 @@ const RoutesContainer = require('../RoutesContainer');
 
 module.exports = function MainPage({ title, user, routes }) {
   return (
-    <Layout title={title}>
+    <Layout title={title} user={user}>
       <RoutesContainer routes={routes} user={user} />
       <p>здесь будут карточки</p>
     </Layout>

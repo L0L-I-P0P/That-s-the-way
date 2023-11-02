@@ -1,10 +1,15 @@
 const React = require('react');
 const Layout = require('../Layout');
 
-module.exports = function LoginForm({ user, title }) {
+module.exports = function LoginForm({ user, title, registered }) {
   return (
     <Layout title={title} user={user}>
       <form style={{ marginTop: '30px' }} id="login-form">
+        {registered ? (
+          <>Пользователь {registered} успешно зарегистрирован</>
+        ) : (
+          ''
+        )}
         <h2>Вход</h2>
         <div className="mb-1">
           <label className="form-label">
