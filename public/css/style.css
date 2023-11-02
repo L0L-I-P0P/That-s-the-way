@@ -5,9 +5,6 @@
   background-color: aquamarine;
   padding: 10px;
 }
-.js-card {
-  margin-left: 160px;
-}
 .music-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -38,7 +35,60 @@
   height: 300px;
   border-radius: 12px;
 }
+.container-profile,
+.route-container,
+.route-container {
+  display: flex;
+  justify-content: space-around;
+}
 
-[class*="copyrights-pane"] {
-	display: none !important;
+.js-add-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ratingStar {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.ratingStar:not(:checked) > input {
+  display: none;
+}
+
+.ratingStar:not(:checked) > label {
+  width: 40px;
+  cursor: pointer;
+  font-size: 40px;
+  color: lightgrey;
+  text-align: center;
+  line-height: 1;
+}
+
+.ratingStar:not(:checked) > label:before {
+  content: '★';
+}
+
+.ratingStar > input:checked ~ label {
+  color: gold;
+}
+
+.ratingStar:not(:checked) > label:hover,
+.ratingStar:not(:checked) > label:hover ~ label {
+  color: gold;
+}
+
+.ratingStar > input:checked + label:hover,
+.ratingStar > input:checked + label:hover ~ label,
+.ratingStar > input:checked ~ label:hover,
+.ratingStar > input:checked ~ label:hover ~ label,
+.ratingStar > label:hover ~ input:checked ~ label {
+  color: gold;
+}
+[class*='copyrights-pane'] {
+  display: none !important;
 }
