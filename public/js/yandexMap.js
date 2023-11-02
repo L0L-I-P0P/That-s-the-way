@@ -1,4 +1,9 @@
-ymaps.ready(() => {
+ymaps.ready(async () => {
+
+// querySeelctor()
+//dataset
+// fetch
+
   const myMap = new ymaps.Map('map', {
     center: [59.91795236804815, 30.304908500000003],
     zoom: 15,
@@ -35,3 +40,5 @@ ymaps.ready(() => {
   myMap.controls.remove('rulerControl'); // удаляем контрол правил
   myMap.behaviors.disable(['scrollZoom']); // отключаем скролл карты (опционально)
 });
+
+module.exports = ymaps.ready

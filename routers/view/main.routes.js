@@ -5,6 +5,7 @@ router.get('/', (req, res) => {
   try {
     res.send(res.renderComponent(mainPage));
   } catch (error) {
+    console.log(error);
     res.status(500).send(error);
   }
 });
