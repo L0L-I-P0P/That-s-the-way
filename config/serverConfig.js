@@ -17,7 +17,7 @@ const serverConfig = (app) => {
   app.use(express.static(path.join(`${__dirname}`, '../public')));
   // Подключаем middleware morgan с режимом логирования "dev", чтобы для каждого HTTP-запроса на
   // сервер в консоль выводилась информация об этом запросе.
-  app.use(morgan('dev'));
+  // app.use(morgan('dev'));
   //подключение ssr
   app.use(ssr);
 };
