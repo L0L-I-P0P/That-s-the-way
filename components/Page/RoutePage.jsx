@@ -1,19 +1,17 @@
 const React = require('react');
+const Layout = require('../Layout');
 
-function RouteCard({ route, user }) {
+function RoutePage({ route, title, user }) {
   return (
-    <div
+    <Layout title={title} user={user}>
+      <div
       className="card js-card"
-      style={{ width: '12rem;' }}
       data-id={route.id}
     >
       <div id="map" className="ya-map"></div>
       <div className="card-body">
         <h5 className="card-title">{route.title}</h5>
-        <p className="card-text">{`${route.description.slice(0, 100)}...`}</p>
-        <a href={`/routes/${route.id}`} className="btn btn-primary">
-          Подробнее
-        </a>
+        <p className="card-text">{route.description}</p>
         {user && user.id === route.user_ID ? (
           <>
             <button
@@ -36,7 +34,8 @@ function RouteCard({ route, user }) {
         )}
       </div>
     </div>
+    </Layout>
   );
 }
 
-module.exports = RouteCard;
+module.exports = RoutePage;

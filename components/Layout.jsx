@@ -14,6 +14,7 @@ module.exports = function Layout({ children, title, user }) {
           src="https://api-maps.yandex.ru/2.1/?apikey=151e3c4e-5b24-4ff4-b3dd-ee46a27a6498&lang=ru_RU"
           type="text/javascript"
         />
+        <script defer src="/js/yandexMap.js" />
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
