@@ -2,7 +2,7 @@ const React = require('react');
 const Layout = require('../Layout');
 const Raiting = require('../Raiting');
 
-function RoutePage({ route, title, user }) {
+function RoutePage({ route, title, user, middlerating }) {
   return (
     <Layout title={title} user={user}>
       <div className="card route-page js-card" data-id={route.id}>
@@ -37,7 +37,7 @@ function RoutePage({ route, title, user }) {
           ) : (
             ''
           )}
-          <Raiting route={route} user={user}>
+          <Raiting route={route} user={user} middlerating={middlerating}>
             {user && user.id !== route.user_ID ? (
               <button
                 type="submit"

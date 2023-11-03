@@ -1,7 +1,12 @@
 const router = require('express').Router();
+const { Route } = require('../../db/models');
+const { Rating } = require('../../db/models');
+
 const { Route, User } = require('../../db/models');
 
+
 const RouteCard = require('../../components/RouteCard');
+const True = require('../../components/True');
 
 router.post('/', async (req, res) => {
   try {
@@ -79,6 +84,43 @@ router.delete('/:routeId', async (req, res) => {
   }
 });
 
+
+router.post('/:routeId/rating', async (req, res) => {
+  const { routeId } = req.params;
+  const { rating } = req.body;
+  try {
+    // отправить запрос к бд
+    const oldrating = await Rating.findOne({
+      where: {
+        user_ID: res.locals.user.id,
+        route_ID: routeId,
+      },
+    });
+    console.log(oldrating);
+    if (oldrating) {
+      const oldRating = await Rating.findOne({
+        where: { user_ID: res.locals.user.id },
+        raw: true,
+      });
+      console.log(oldRating.rating);
+      const html = res.renderComponent(True, {
+        message: 'Вы уже оценили данный маршрут',
+        ratingRoute: `${oldRating.rating}`,
+      });
+      return res.status(404).json({ success: false, trueHtml: html });
+    }
+    const newRating = await Rating.create({
+      user_ID: res.locals.user.id,
+      route_ID: routeId,
+      rating: rating,
+    });
+    const html = res.renderComponent(True, {
+      message: 'Ваша оценка:',
+      ratingRoute: rating,
+    });
+    return res.json({ success: true, trueHtml: html });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
 router.put('/:routeId/length', async (req, res) => {
   const { routeId } = req.params;
   const { route_length } = req.body;

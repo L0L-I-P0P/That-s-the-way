@@ -1,5 +1,10 @@
 const router = require('express').Router();
+
+const { Route } = require('../../db/models');
+const { Rating } = require('../../db/models');
+
 const { Route, User } = require('../../db/models');
+
 
 const RoutePage = require('../../components/Page/RoutePage');
 const UpdateRoutePage = require('../../components/Page/UpdateRoutePage');
@@ -23,9 +28,17 @@ router.get('/:routeId', async (req, res) => {
       where: { id: Number(routeId) },
       include: [User],
     });
+    const ratingRoute = await Rating.findOne({ where: { id: routeId } });
 
     // 2. отправить верстку
-    const html = res.renderComponent(RoutePage, { route });
+    const raiting = await Rating.findAll({
+      attributes: ['rating'],
+      raw: true,
+    });
+
+    const middlerating =
+      (await raiting.reduce((a, b) => a + b.rating, 0)) / raiting.length;
+    const html = res.renderComponent(RoutePage, { route, middlerating });
     res.send(html);
   } catch (error) {
     // если что-то пошло не так, позвращаем 500 статус
