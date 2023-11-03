@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       rating: {
-        defaultValue: 3,
+        defaultValue: 1,
         type: DataTypes.FLOAT,
       },
       user_ID: {

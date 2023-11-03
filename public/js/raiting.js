@@ -54,6 +54,34 @@ function initRatings() {
   }
 }
 
-async function setRatingValue(value, rating){
-  
+const ratingForm = document.querySelector('.rating-form');
+if (ratingForm) {
+  ratingForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const { id } = ratingForm.dataset;
+    console.log(id);
+    try {
+      const { rating } = event.target;
+      const res = await fetch(`/api/routes/${id}/rating`, {
+        method: 'POST',
+        body: JSON.stringify({
+          rating: Number(rating.value),
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      const True = document.querySelector('.js-true');
+      if (True) {
+        True.remove();
+      }
+      if (data.success === false) {
+        ratingForm.insertAdjacentHTML('afterbegin', data.trueHtml);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
 }
