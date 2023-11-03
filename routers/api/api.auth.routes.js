@@ -45,8 +45,14 @@ router.post('/login', async (req, res) => {
       });
       return res.status(404).json({ success: false, errorHtml: html });
     }
+    if (!user) {
+      const html = res.renderComponent(ErrorDiv, {
+        message: 'Неверный пароль или email',
+      });
+      return res.status(404).json({ success: false, errorHtml: html });
+    }
     const check = await bcrypt.compare(password, user.password);
-    if (!user || !check) {
+    if (!check) {
       const html = res.renderComponent(ErrorDiv, {
         message: 'Неверный пароль или email',
       });
