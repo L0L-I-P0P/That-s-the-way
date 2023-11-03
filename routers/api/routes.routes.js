@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Route } = require('../../db/models');
+const { Route, User } = require('../../db/models');
 
 const RouteCard = require('../../components/RouteCard');
 
@@ -38,6 +38,7 @@ router.put('/:routeId', async (req, res) => {
   try {
     const route = await Route.findOne({
       where: { id: routeId, user_ID: res.locals.user.id },
+      include: [User],
     });
     if (!route) {
       return res.status(400).json({ message: 'Нет доступа' });
@@ -47,7 +48,7 @@ router.put('/:routeId', async (req, res) => {
     route.description = description;
     route.route_from = route_from;
     route.route_to = route_to;
-    route.place = place
+    route.place = place;
 
     await route.save();
     res.json({ success: true, updatedRoute: route });
@@ -75,6 +76,29 @@ router.delete('/:routeId', async (req, res) => {
     res.sendStatus(204);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.put('/:routeId/length', async (req, res) => {
+  const { routeId } = req.params;
+  const { route_length } = req.body;
+
+  try {
+    const route = await Route.findOne({
+      where: { id: routeId },
+      include: [User],
+    });
+    if (!route) {
+      return res.status(400).json({ message: 'Нет доступа' });
+    }
+
+    route.route_length = route_length;
+
+    await route.save();
+    res.json({ success: true, updatedRoute: route });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
   }
 });
 
