@@ -1,3 +1,15 @@
+* {
+  font-family: 'IBM Plex Mono', monospace;
+}
+.navbar-brand {
+  font-size: 28px;
+  font-family: 'Sedgwick Ave Display', cursive;
+}
+.route-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .music-header {
   display: flex;
   gap: 10px;
@@ -31,6 +43,7 @@
 .music-card {
 }
 .card {
+  margin-right: 15px;
   overflow: hidden;
 }
 .ya-map {
@@ -99,3 +112,8 @@
 [class*='copyrights-pane'] {
   display: none !important;
 }
+.btn {
+  margin-right: 15px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Sedgwick+Ave+Display&display=swap');

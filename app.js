@@ -13,7 +13,7 @@ const checkUser = require('./middleware/verifyJWT');
 
 const indexRouter = require('./routers/index.routes');
 
-app.locals.title = 'Таков Путь';
+app.locals.title = 'Таков Путь 🚲';
 // подключение middleware
 serverConfig(app);
 // проверка кто сидит на сайте через проверку токена(cookie)

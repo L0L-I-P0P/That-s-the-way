@@ -31,7 +31,18 @@ function UpdateRoutePage({ title, user, route }) {
         </div>
         <div className="mb-3">
           <label className="form-label">
-            Точка А:
+            Населенный пункт:
+            <input
+              type="text"
+              className="form-control"
+              name="place"
+              value={route.place}
+            />
+          </label>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">
+            Начало маршрута:
             <input
               type="text"
               className="form-control"
@@ -42,7 +53,7 @@ function UpdateRoutePage({ title, user, route }) {
         </div>
         <div className="mb-3">
           <label className="form-label">
-            Точка Б:
+            Конечный адрес маршрута:
             <input
               type="text"
               className="form-control"
@@ -53,7 +64,7 @@ function UpdateRoutePage({ title, user, route }) {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Отправить
+          Сохранить
         </button>
       </form>
       <script defer src="/js/update.js" />
