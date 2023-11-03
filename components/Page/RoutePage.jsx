@@ -16,6 +16,7 @@ function RoutePage({ route, title, user, middlerating }) {
         <div className="card-body">
           <h5 className="card-title">{route.title}</h5>
           <p className="card-text">{route.description}</p>
+          <p className="card-text">{`Автор: ${route.User.name}`}</p>
           {user && user.id === route.user_ID ? (
             <>
               <button

@@ -2,6 +2,9 @@ const router = require('express').Router();
 const { Route } = require('../../db/models');
 const { Rating } = require('../../db/models');
 
+const { Route, User } = require('../../db/models');
+
+
 const RouteCard = require('../../components/RouteCard');
 const True = require('../../components/True');
 
@@ -40,6 +43,7 @@ router.put('/:routeId', async (req, res) => {
   try {
     const route = await Route.findOne({
       where: { id: routeId, user_ID: res.locals.user.id },
+      include: [User],
     });
     if (!route) {
       return res.status(400).json({ message: 'Нет доступа' });
@@ -80,6 +84,7 @@ router.delete('/:routeId', async (req, res) => {
   }
 });
 
+
 router.post('/:routeId/rating', async (req, res) => {
   const { routeId } = req.params;
   const { rating } = req.body;
@@ -116,6 +121,26 @@ router.post('/:routeId/rating', async (req, res) => {
     return res.json({ success: true, trueHtml: html });
   } catch (error) {
     res.status(500).json({ error: error.message });
+router.put('/:routeId/length', async (req, res) => {
+  const { routeId } = req.params;
+  const { route_length } = req.body;
+
+  try {
+    const route = await Route.findOne({
+      where: { id: routeId },
+      include: [User],
+    });
+    if (!route) {
+      return res.status(400).json({ message: 'Нет доступа' });
+    }
+
+    route.route_length = route_length;
+
+    await route.save();
+    res.json({ success: true, updatedRoute: route });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
   }
 });
 
