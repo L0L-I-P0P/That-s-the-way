@@ -18,6 +18,7 @@ function RouteCard({ route, user }) {
       <div className="card-body">
         <h5 className="card-title">{route.title}</h5>
         <p className="card-text">{`${route.description.slice(0, 100)}...`}</p>
+        <p className="card-text">{`Автор: ${route.User.name}`}</p>
         <Raiting route={route} />
         <a href={`/routes/${route.id}`} className="btn btn-primary">
           Подробнее
