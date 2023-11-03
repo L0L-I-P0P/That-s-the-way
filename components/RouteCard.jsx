@@ -13,11 +13,16 @@ function RouteCard({ route, user }) {
         data-from={route.route_from}
         data-to={route.route_to}
         data-city={route.place}
+        data-id={route.id}
         className="ya-map"
       ></div>
       <div className="card-body">
         <h5 className="card-title">{route.title}</h5>
         <p className="card-text">{`${route.description.slice(0, 100)}...`}</p>
+        <p className="card-text">
+          Длина маршрута:{' '}
+          <span id={`length${route.id}`}>{route.route_length}</span>
+        </p>
         <p className="card-text">{`Автор: ${route.User.name}`}</p>
         <Raiting route={route} />
         <a href={`/routes/${route.id}`} className="btn btn-primary">
