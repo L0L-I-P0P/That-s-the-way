@@ -22,6 +22,7 @@ module.exports = function Layout({ children, title, user }) {
           crossOrigin="anonymous"
         />
         <script defer src="/js/raiting.js" />
+        <script defer src="/js/remove.js" />
         <link rel="stylesheet" href="/css/style.css" />
       </head>
       <Header user={user} />
