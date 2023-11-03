@@ -9,7 +9,7 @@ const Raiting = require('./Raiting');
 
 function RoutesContainer({ routes, user }) {
   return (
-    <div className="js-route-container route-container">
+    <div className="js-routes-container route-container">
       {routes.map((route) => (
         <RouteCard route={route} user={user} />
       ))}
