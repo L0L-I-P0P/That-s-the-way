@@ -1,5 +1,5 @@
 // делегирование событие
-const routesContainer = document.querySelector('.js-routes-container');
+const routesContainer = document.querySelector('.js-card ');
 
 routesContainer.addEventListener('click', async (e) => {
   // вешаем слушатель событий на весь контейнер, но внутри проверяем:
@@ -23,6 +23,7 @@ routesContainer.addEventListener('click', async (e) => {
       if (response.ok) {
         // 2. удалить карточку из дом-дерева
         parentContainer.remove();
+        window.location.assign('/')
       } else {
         // если плохой статус, тогда парсим сообщение от сервера
         const data = await response.json();
