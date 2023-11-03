@@ -39,8 +39,8 @@ function RoutePage({ route, title, user }) {
           <Raiting route={route} user={user}>
             {user && user.id !== route.user_ID ? (
               <button
-                type="button"
-                className="btn btn-danger js-btn-remove"
+                type="submit"
+                className="btn btn-danger js-btn-rating"
                 style={{ marginLeft: '10px' }}
               >
                 Оставить оценку
