@@ -11,11 +11,15 @@ function RoutePage({ route, title, user, middlerating }) {
           data-from={route.route_from}
           data-to={route.route_to}
           data-city={route.place}
-          className="ya-map"
+          className="route-page-map ya-map"
         ></div>
         <div className="card-body">
           <h5 className="card-title">{route.title}</h5>
           <p className="card-text">{route.description}</p>
+          <p className="card-text">
+            Длина маршрута:{' '}
+            <span id={`length${route.id}`}>{route.route_length}</span>
+          </p>
           <p className="card-text">{`Автор: ${route.User.name}`}</p>
           {user && user.id === route.user_ID ? (
             <>
