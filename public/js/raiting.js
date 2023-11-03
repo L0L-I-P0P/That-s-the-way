@@ -7,13 +7,18 @@ function initRatings() {
   let ratingActive;
   let ratingValue;
 
-  for (let index = 0; index < ratings.length; index++) {
-    const rating = ratings[index];
+  ratings.forEach((el) => {
+    const rating = el;
     initRating(rating);
-  }
+  });
+
   function initRating(rating) {
     initRatingVars(rating);
     setRatingActiveWidht();
+
+    if (rating.classList.contains('rating-set')) {
+      setRating(rating);
+    }
   }
   function initRatingVars(rating) {
     ratingActive = rating.querySelector('.rating_active');
@@ -24,4 +29,31 @@ function initRatings() {
     const ratingActiveWidht = index / 0.05;
     ratingActive.style.width = `${ratingActiveWidht}%`;
   }
+
+  function setRating(rating) {
+    const ratingItems = rating.querySelectorAll('.rating_item');
+    for (let index = 0; index < ratingItems.length; index++) {
+      const ratingItem = ratingItems[index];
+      ratingItem.addEventListener('mouseenter', function (e) {
+        initRatingVars(rating);
+        setRatingActiveWidht(ratingItem.value);
+      });
+      ratingItem.addEventListener('mouseleave', function (e) {
+        setRatingActiveWidht();
+      });
+      ratingItem.addEventListener('click', function (e) {
+        initRatingVars(rating);
+        setRatingActiveWidht(ratingItem.value);
+        if (rating.dataset.ajax) {
+          setRatingValue(ratingItem.value, rating);
+        } else {
+          ratingValue.innerHTML = index + 1;
+        }
+      });
+    }
+  }
+}
+
+async function setRatingValue(value, rating){
+  
 }
