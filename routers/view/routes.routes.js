@@ -1,9 +1,5 @@
 const router = require('express').Router();
-
-const { Route } = require('../../db/models');
-const { Rating } = require('../../db/models');
-
-const { Route, User } = require('../../db/models');
+const { Route, Rating, User } = require('../../db/models');
 
 
 const RoutePage = require('../../components/Page/RoutePage');
