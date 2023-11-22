@@ -7,7 +7,7 @@ ymaps.ready(async () => {
     const city = await mapElement.getAttribute('data-city');
     const id = await mapElement.getAttribute('data-id');
     // console.log(from, to, city, '>>>>> Данные из БАЗЫ');
-    const myMap = new ymaps.Map(mapElement, {
+    const myMap = await new ymaps.Map(mapElement, {
       center: [59.91795236804815, 30.304908500000003],
       zoom: 7,
       controls: ['routePanelControl'],
@@ -20,7 +20,7 @@ ymaps.ready(async () => {
     route.model.events.add('requestsuccess', async () => {
       const activeRoute = route.getActiveRoute();
       if (activeRoute) {
-        const length = route.getActiveRoute().properties.get('distance');
+        const length = await route.getActiveRoute().properties.get('distance');
         const response = await fetch(`/api/routes/${id}/length`, {
           method: 'PUT',
           body: JSON.stringify({
@@ -30,9 +30,10 @@ ymaps.ready(async () => {
             'Content-Type': 'application/json',
           },
         });
-        const lengthText = document.getElementById(`length${id}`);
+        const data = await response.json();
         // console.log(lengthText);
-        if (lengthText) {
+        if (data.ok) {
+          const lengthText = document.getElementById(`length${id}`);
           lengthText.innerText = length.text;
         }
         /* console.log(`Расстояние маршрута с ${from} до ${to}: ${length.text}`); */

@@ -11,7 +11,7 @@ router.use('/', mainRouter);
 router.use('/routes', routesRoute);
 router.use('/auth', authRouter);
 router.use('/api/auth', apiAuth);
-router.use('/api/routes', apiRoutesRoute);
-router.use('/profile', profileRoute);
+router.use('/api/routes', apiRoutxesRoute);
+router.use('/profile', profileRoute);x
 
 module.exports = router;

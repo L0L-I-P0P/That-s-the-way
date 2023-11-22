@@ -14,9 +14,26 @@ module.exports = (sequelize, DataTypes) => {
   }
   Rating.init(
     {
-      rating: DataTypes.FLOAT,
-      user_ID: DataTypes.INTEGER,
-      route_ID: DataTypes.INTEGER,
+      rating: {
+        defaultValue: 3,
+        type: DataTypes.FLOAT,
+      },
+      user_ID: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+      },
+      route_ID: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Routes',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+      },
     },
     {
       sequelize,
@@ -25,4 +42,3 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Rating;
 };
-

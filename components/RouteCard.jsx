@@ -1,7 +1,14 @@
 const React = require('react');
 const Raiting = require('./Raiting');
 
-function RouteCard({ route, user, middlerating }) {
+function RouteCard({ route, user }) {
+  let middlerating;
+  if (!route.Ratings || route.Ratings.length === 0) {
+    middlerating = 0;
+  } else {
+    middlerating =
+      route.Ratings.reduce((a, b) => a + b.rating, 0) / route.Ratings.length;
+  }
   return (
     <div
       className="card mt-5 js-card"
@@ -19,14 +26,13 @@ function RouteCard({ route, user, middlerating }) {
       <div className="card-body">
         <h5 className="card-title">{route.title}</h5>
         <p className="card-text">{`${route.description.slice(0, 100)}...`}</p>
-        <Raiting route={route} middlerating={middlerating} />
         <p className="card-text">
           Длина маршрута:{' '}
           <span id={`length${route.id}`}>{route.route_length}</span>
         </p>
         <p className="card-text">{`Автор: ${route.User.name}`}</p>
-        <Raiting route={route} />
-        
+        <Raiting route={route} middlerating={middlerating} />
+
         <a href={`/routes/${route.id}`} className="btn btn-primary">
           Подробнее
         </a>

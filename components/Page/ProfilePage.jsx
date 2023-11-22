@@ -15,7 +15,9 @@ function ProfilePage({ title, user, routes }) {
         <div className="route-container">
           <RoutesContainer routes={routes} user={user} />
         </div>
-        <div className="update-container"><AddRouteForm /></div>
+        <div className="update-container">
+          <AddRouteForm />
+        </div>
         <script defer src="/js/add.js" />
       </div>
     </Layout>

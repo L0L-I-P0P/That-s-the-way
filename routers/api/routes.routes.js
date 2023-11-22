@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Route, Rating, User } = require('../../db/models');
 
-
 const RouteCard = require('../../components/RouteCard');
 const True = require('../../components/True');
 
@@ -11,13 +10,18 @@ router.post('/', async (req, res) => {
     const { title, description, place, route_from, route_to } = req.body;
 
     // 2. сохранить данные с клиента в бд
-    const route = await Route.create({
+    const newRoute = await Route.create({
       title,
       description,
       route_from,
       route_to,
       place,
       user_ID: res.locals.user.id, // привязываю факт к юзеру
+    });
+
+    const route = await Route.findOne({
+      where: { id: newRoute.id },
+      include: [User],
     });
 
     const html = res.renderComponent(RouteCard, { route }, { doctype: false });
@@ -31,6 +35,28 @@ router.post('/', async (req, res) => {
 });
 
 // роуты на апдейт должны быть параметризированными
+router.put('/:routeId/length', async (req, res) => {
+  const { routeId } = req.params;
+  const { route_length } = req.body;
+
+  try {
+    const route = await Route.findOne({
+      where: { id: routeId },
+      include: [User],
+    });
+    if (!route) {
+      return res.status(400).json({ message: 'Нет доступа' });
+    }
+
+    route.route_length = route_length;
+
+    await route.save();
+    res.json({ success: true, updatedRoute: route });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
 // PUT /facts/:id (по REST API)
 router.put('/:routeId', async (req, res) => {
   const { routeId } = req.params;
@@ -81,7 +107,6 @@ router.delete('/:routeId', async (req, res) => {
   }
 });
 
-
 router.post('/:routeId/rating', async (req, res) => {
   const { routeId } = req.params;
   const { rating } = req.body;
@@ -119,30 +144,7 @@ router.post('/:routeId/rating', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}); 
-
-
-router.put('/:routeId/length', async (req, res) => {
-  const { routeId } = req.params;
-  const { route_length } = req.body;
-
-  try {
-    const route = await Route.findOne({
-      where: { id: routeId },
-      include: [User],
-    });
-    if (!route) {
-      return res.status(400).json({ message: 'Нет доступа' });
-    }
-
-    route.route_length = route_length;
-
-    await route.save();
-    res.json({ success: true, updatedRoute: route });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
-  }
 });
+
 // comment
 module.exports = router;

@@ -2,7 +2,14 @@ const React = require('react');
 const Layout = require('../Layout');
 const Raiting = require('../Raiting');
 
-function RoutePage({ route, title, user, middlerating }) {
+function RoutePage({ route, title, user }) {
+  let middlerating;
+  if (!route.Ratings || route.Ratings.length === 0) {
+    middlerating = 0;
+  } else {
+    middlerating =
+      route.Ratings.reduce((a, b) => a + b.rating, 0) / route.Ratings.length;
+  }
   return (
     <Layout title={title} user={user}>
       <div className="card route-page js-card" data-id={route.id}>
@@ -18,7 +25,7 @@ function RoutePage({ route, title, user, middlerating }) {
           <p className="card-text">{route.description}</p>
           <p className="card-text">
             Длина маршрута:{' '}
-            <span id={`length${route.id}`}>{route.route_length}</span>
+            <span id={`length${route.id}`}>{route?.route_length}</span>
           </p>
           <p className="card-text">{`Автор: ${route.User.name}`}</p>
           {user && user.id === route.user_ID ? (
@@ -41,7 +48,11 @@ function RoutePage({ route, title, user, middlerating }) {
           ) : (
             ''
           )}
-          <Raiting route={route} user={user} middlerating={middlerating}>
+          <Raiting
+            route={route}
+            user={user}
+            middlerating={middlerating.toFixed(1)}
+          >
             {user && user.id !== route.user_ID ? (
               <button
                 type="submit"

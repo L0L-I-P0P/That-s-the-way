@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Route, Rating, User } = require('../../db/models');
 
-
 const RoutePage = require('../../components/Page/RoutePage');
 const UpdateRoutePage = require('../../components/Page/UpdateRoutePage');
 
@@ -22,7 +21,7 @@ router.get('/:routeId', async (req, res) => {
     // 1. запрос к бд
     const route = await Route.findOne({
       where: { id: Number(routeId) },
-      include: [User],
+      include: [User, Rating],
     });
     const ratingRoute = await Rating.findOne({ where: { id: routeId } });
 

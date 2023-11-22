@@ -1,6 +1,13 @@
 const React = require('react');
 
-module.exports = function Raiting({ user, route, children, middlerating }) {
+module.exports = function Raiting({ user, route, children }) {
+  let middlerating;
+  if (route.Ratings.length === 0) {
+    middlerating = 0;
+  } else {
+    middlerating =
+      route.Ratings.reduce((a, b) => a + b.rating, 0) / route.Ratings.length;
+  }
   return (
     <form
       className="rating-form"
@@ -48,7 +55,7 @@ module.exports = function Raiting({ user, route, children, middlerating }) {
             <label title="Оценка «5»"></label>
           </div>
         </div>
-        <div className="rating_value">{middlerating}</div>
+        <div className="rating_value">{middlerating.toFixed(1)}</div>
         <div>{children}</div>
       </div>
     </form>
